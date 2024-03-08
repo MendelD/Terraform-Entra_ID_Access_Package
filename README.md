@@ -18,10 +18,10 @@ az account show --query tenantId
 
 ### Create app registration ###
 ```
-$app=$(az rest -method post -uri https://graph.microsoft.com/v1.0/applications --headers 'Content-Type=application/json' --body '{\"displayName\": \"Terraform Service Principal 2\"}' --query appId --output tsv)
+$app=$(az rest --method post --uri https://graph.microsoft.com/v1.0/applications --headers 'Content-Type=application/json' --body '{\"displayName\": \"Terraform Service Principal\"}')
 
-$appid=$app.id
-$clientid=$app.appId
+$appid=($app | ConvertFrom-Json).id
+$clientid=($app | ConvertFrom-Json).appId
 
 echo "clientID = $clientid"
 ```
